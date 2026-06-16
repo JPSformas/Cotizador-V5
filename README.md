@@ -7,7 +7,6 @@ Sistema de cotización para Formas.shop
 - `detalle-cotizacion.html` - Página principal de detalle de cotización
 - `editItem.html` - Editor de items de cotización
 - `editItem-generico.html` - Editor genérico de items
-- `Coti-PDV.html` - Punto de venta
 - `js-scripts/` - Scripts JavaScript del proyecto
 - `styles/` - Archivos CSS de estilos
 - `Fonts/` - Fuentes tipográficas (Gilroy, Poppins)
