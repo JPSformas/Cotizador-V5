@@ -23,6 +23,9 @@ npm-debug.log*
 *.tmp
 *.temp
 
+# Screenshot tooling (dev only)
+node_modules/
+
 
 
 
