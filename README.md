@@ -19,7 +19,7 @@ Sistema de cotización para Formas.shop
 - CSS3
 - JavaScript
 - Bootstrap 5
-- Font Awesome 6.4.0
+- Font Awesome 7.0.1
 
 ## Características
 

@@ -86,7 +86,7 @@ Reemplaza el ordenamiento anterior por click en headers de "Nombre" y "Subtotal"
 
 **Commit:** `be0259c`
 
-- Fila de acciones sobre la tabla con `flex-wrap gap-5` (responsive).
+- Fila de acciones sobre la tabla con `flex-wrap gap-5` (responsive) — **solo v4**; en v5 fue reemplazada por `.table-toolbar` de dos estados (Parte II).
 - Wrapper `.dragItem-inner`: drag handle + número de posición + checkbox.
 - Drag handle con clase explícita `.drag-handle`.
 - Ajustes responsive en `detalle-cotizacion.css` (grid area `drag`, alineación, gap en mobile).
@@ -122,34 +122,7 @@ En `editItem.html` y `editItem-generico.html`:
 
 **v4 y v5:** layout idéntico.
 
-### B-3) Nuevos campos en el formulario de edición
-
-- **`editItem.html`:** campo **"Información de envío"** junto a "Tiempo de producción".
-- **`editItem-generico.html`:** fila **"Tiempo de producción"** + **"Información de envío"** (antes el genérico no los tenía).
-
-**v4 y v5:** idéntico.
-
-### B-4) Formato financiero en el editor genérico
-
-- Inputs numéricos reemplazados por `data-financial-format="true"` (usa `financial-formatting.js`).
-- Aplica a PVP/Costo, Setup logo, columnas de la tabla de cotización y sidebar mobile.
-- Quitado **"Stock disponible"** del genérico.
-- Botones lápiz junto a PVP/Costo, Mínimo para logo gratis y Setup logo.
-- Corregido typo `<input ype=...>` en Subtotal.
-- Botones "Editar" mobile del genérico abren el offcanvas `#sidebarMasElementos`.
-
-**v4 y v5:** idéntico.
-
-### B-5) Modal de selección de imagen — Genérico
-
-En `editItem-generico.html`, secciones alineadas con `editItem.html`:
-
-- **"Imágenes de producto"** (`#productImagesGrid`)
-- **"Imágenes personalizadas"** (`#zakekeImagesGrid`)
-
-**v4 y v5:** idéntico.
-
-### B-6) Buscador de productos — Atributos visibles en el preview
+### B-3) Buscador de productos — Atributos visibles en el preview
 
 **Archivos:** `js-scripts/product-search.js`, `styles/product-search-preview.css`
 
@@ -161,22 +134,21 @@ En `editItem-generico.html`, secciones alineadas con `editItem.html`:
 
 **v4 y v5:** comportamiento idéntico.
 
-### B-7) Limpieza y actualización de placeholders de imagen
+### B-4) Limpieza y actualización de placeholders de imagen
 
-**Eliminados** (en v4):
+**Eliminados** (en v4 y v5):
 
 - `IMG/Carrito modificaciones 2.png`, `Upload_logo.svg`, `placeholderPIC.png`, `placeholderPIC1.png`, `placeholderPIC2.png`, `placeholderTextil.jpg`, `reload.svg`, `unnamed.jpg`
 
-**Nuevos placeholders por categoría** (en v4):
+**Nuevos placeholders por categoría** (11 archivos en `IMG/`):
 
 - `H&B_placeholder.jpeg`, `Hogar&TLibre_placeholder.jpeg`, `drinkware_placeholder.jpeg`, `escritura_placeholder.jpeg`, `grafico-inst_placeholder.jpeg`, `llaveros_placeholder.jpeg`, `marroquineria_placeholder.jpeg`, `noestres_placeholder.jpeg`, `oficina_placeholder.jpeg`, `tecnologia_placeholder.jpeg`, `textil_placeholder.jpeg`
 
-**Diferencia v4 vs v5:** los 11 placeholders de categoría están en el repo **v4**; en **v5 no están commiteados** en `IMG/` (el código puede referenciarlos pero los archivos no están en el repositorio v5).
+**v4 y v5:** mismos 11 placeholders de categoría en `IMG/` (incorporados en v4 con `0a58554` y presentes también en el repo v5).
 
 ### B-8) Otros ajustes menores (`0a58554`)
 
 - **Font Awesome** actualizado a **7.0.1** en `detalle-cotizacion.html`, `editItem.html`, `editItem-generico.html`.
-- `editItem-generico.html` ahora linkea `Fonts/fonts.css` y `Fonts/font-icons.css`.
 - `styles/complementos.css`: `.icon-button` de `1rem` a `0.9rem`.
 
 **v4 y v5:** idéntico.
@@ -194,7 +166,7 @@ En `editItem-generico.html`, secciones alineadas con `editItem.html`:
 | Nav entre ítems | `cotizacion-edit-item-nav.js`, `editItem*.html`, `drag-and-drop-items.js` | `0a58554` |
 | Rediseño editItem | `editItem.html`, `editItem-generico.html` | `0a58554` |
 | Atributos en búsqueda | `product-search.js`, `product-search-preview.css` | `0a58554` |
-| Placeholders | `IMG/*_placeholder.jpeg` | `0a58554` (solo repo v4) |
+| Placeholders | `IMG/*_placeholder.jpeg` | `0a58554` (v4 y v5) |
 
 ---
 
@@ -217,7 +189,6 @@ Los commits v5 relevantes: `2d9a4e5` (inicial), `15f8fa3` (toolbar simplificada 
 | Acciones masivas | Habilitar botón eliminar | 6 acciones en toolbar — **mockup, sin aplicar cambios** |
 | Layout formulario | 50/50 | 66/33 (Información / Atajos globales) |
 | Modal cantidades | Sin banner de contexto | Banner azul (selección) o amarillo (global) |
-| Placeholders categoría en repo | ✅ 11 archivos en `IMG/` | ❌ No incluidos en el repo |
 
 ### Estado funcional de la toolbar v5 (importante)
 
@@ -235,7 +206,9 @@ Los commits v5 relevantes: `2d9a4e5` (inicial), `15f8fa3` (toolbar simplificada 
 | Aplicar descuento / setup / envío | ❌ UI sin lógica |
 | Eliminar filas seleccionadas | ❌ UI sin lógica |
 
-Lo que **sí funciona** en v5 además del mockup: `price-update-indicator.js`, checkboxes (Parte I + extensiones v5), drag-and-drop, ordenamiento, modales de productos, navegación editItem, etc.
+Lo que **sí funciona** en v5 además del mockup: checkboxes (Parte I + extensiones v5), drag-and-drop, ordenamiento, modales de productos, navegación editItem, etc.
+
+**Nota sobre `price-update-indicator.js`:** el archivo **difiere entre v4 y v5**. En v4 está cableado al toggle texto `#actualizarPreciosToggle` (sin fecha de bloqueo ni tooltips PVP). En v5 usa los radios `#preciosActualizadosOff` / `On`, `#preciosLockedDate` y tooltips — es parte del rediseño de Parte II, no de la base compartida.
 
 ---
 
@@ -330,13 +303,19 @@ Toggle iconográfico en "Atajos globales" + fecha bajo el candado.
 
 ### v4 — sin banner de contexto
 
+El modal tiene botones **"Guardar cambios"** en el HTML, pero **sin IDs** y **sin handlers JS** conectados (no aplican cantidades).
+
 ![v4 cantidades modal](comparison-screenshots/v4-05-cantidades-modal.png)
 
 ### v5 — Cotizar rápido (global, banner amarillo)
 
+Banner **amarillo** (clase `.context-global`): *"Se aplicará a todos los productos de la cotización"*
+
 ![v5 cotizar rapido](comparison-screenshots/v5-08-cotizar-rapido-modal.png)
 
 ### v5 — Desde toolbar (banner azul)
+
+Banner **azul**: *"Se aplicará a N ítems seleccionados"*
 
 ![v5 cantidades selection](comparison-screenshots/v5-09-cantidades-selection-modal.png)
 
@@ -359,11 +338,14 @@ Iconos + "Seleccionar todos":
 | Archivo | Propósito |
 |---------|-----------|
 | `js-scripts/cotizacion-selection-toolbar.js` | Toolbar contextual (mockup) |
-| `IMG/lock-solid.svg`, `lock-open-solid.svg` | Iconos bloqueo de precios |
+| `IMG/lock-solid.svg`, `lock-open-solid.svg` | Assets de candado (el HTML usa **SVG inline** en `detalle-cotizacion.html`; estos archivos no están referenciados en el markup) |
 
 ### Removido en v5 (`15f8fa3`)
 
+- `js-scripts/PRODUCTION-GUIDE.md`
+- `cursor_table_design_and_functionality_r.md`
 - Estilos de badges (`.discount-badge`, `.setup-badge`, `.envio-badge`)
+- Bloque `.toggle-switch-*` de `styles/complementos.css` (el control de precios v5 vive en `detalle-cotizacion.css`)
 - ~400 líneas de lógica en `cotizacion-selection-toolbar.js` (antes funcional, ahora mockup)
 
 ### Extensiones v5 sobre `cotizacion-items-checkboxes.js`
@@ -381,7 +363,7 @@ flowchart TB
         A1["Checkboxes + posición + sort dropdown"]
         B1["Nav editItem + rediseño header/footer"]
         B6["Atributos en búsqueda"]
-        B7["Placeholders categoría (solo repo v4)"]
+        B7["Placeholders categoría (v4 + v5)"]
     end
 
     subgraph v5only["Parte II — Solo v5"]
@@ -429,7 +411,16 @@ node capture-comparison.mjs
 
 ## Conclusión
 
-- **Parte I** documenta las mejoras de productividad ya en producción en v4 y heredadas por v5: selección múltiple, reorden por posición, sort por dropdown, navegación entre ítems en edición, rediseño de editItem, atributos en búsqueda y placeholders (en repo v4).
+- **Parte I** documenta las mejoras de productividad ya en producción en v4 y heredadas por v5: selección múltiple, reorden por posición, sort por dropdown, navegación entre ítems en edición, rediseño de editItem, atributos en búsqueda y placeholders por categoría.
 - **Parte II** documenta el rediseño de `detalle-cotizacion` en v5: toolbar contextual, lock de precios, modales con alcance. La lógica de acciones masivas en v5 **aún es mockup** (`15f8fa3`).
 
 **Próximo paso sugerido (v5):** conectar los handlers de `cotizacion-selection-toolbar.js` a la API de persistencia cuando esté definida.
+
+---
+
+## Otros archivos del repo (fuera de este doc)
+
+| Archivo | Estado |
+|---------|--------|
+| `README.md` | Dice Font Awesome **6.4.0**; en el código es **7.0.1** (ver B-8) — conviene actualizarlo. |
+| `RESUMEN-MODIFICACIONES.md` | En carpeta padre `Cotizacion/`; contenido absorbido por este documento. |
